@@ -2,7 +2,7 @@ name: CI Pipeline Tecnologais Web
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "develop", "master" ]
   pull_request:
 
 jobs:
