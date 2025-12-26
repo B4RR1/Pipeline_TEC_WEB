@@ -1,0 +1,49 @@
+name: CI Pipeline Tecnologais Web
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+
+jobs:
+  build-test-lint-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clonar el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Compilar la aplicación
+      - name: Build application
+        run: npm run build
+
+      # Ejecutar tests
+      - name: Run unit tests
+        run: npm run test
+        continue-on-error: false
+
+      # Subir reporte de tests
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: junit.xml
+
+      # Análisis estático
+      - name: Run ESLint
+        run: npm run lint
+
+      # Construir imagen Docker
+      - name: Build Docker image
+        run: docker build -t vue-app .
