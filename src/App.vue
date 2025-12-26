@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Bienvenido a Vue.js App"/>
-  <h1>Pipeline Tecnologias Web
+  <h1>Pipeline Tecnologias Web</h1>
 </template>
 
 <script>
